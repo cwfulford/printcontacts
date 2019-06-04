@@ -1,3 +1,24 @@
+#!/bin/bash
+# $Id: printcontacts,v 1.4 2019/06/04 08:29:42 fulford Exp $
+# $Source: /src/admin/usr/local/etc/RCS/printcontacts,v $
+# $Revision: 1.4 $
+# Author C W Fulford.
+# Copyright 2016 (c) C W Fulford.
+# Licensed for public use under the LGPL, .
+# For assistance contact fulford@fulford.net 0793 572 8612
+########################################################################
+cmd=`basename $0`
+ver=`echo "$Id: printcontacts,v 1.4 2019/06/04 08:29:42 fulford Exp $"|awk '{print $3,$4,$5}'`
+syntax="$cmd [-d]  [-v]|-V"
+while [ $# -gt 0 ] ;do
+	case $1 in 
+		-d) set -x;debug=0;shift;;
+		-v) verbose=:;shift;;
+		-V) echo "$cmd $Revision: 1.4 $ $Date: 2019/06/04 08:29:42 $"|awk '{print $1,$3,$6}';exit;;  
+	esac
+done
+
+
 while [ $# -gt 0 ];do
 	case $1 in
 		-t) fmt=tif;shift ;;
@@ -18,7 +39,7 @@ echo $title
  if [ ! $tile ];then
  	n=`ls|wc -w`
 	[ $n -gt 40 ]&&{
-		ls |awk '{ while (NR <= 40) print $1 }'
+		ls |awk 'NR <= 40 {print $1 }'
 	}
 		
  	case $n in
