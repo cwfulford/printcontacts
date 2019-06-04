@@ -1,20 +1,20 @@
 #!/bin/bash
-# $Id: printcontacts,v 1.5 2019/06/04 08:38:54 fulford Exp fulford $
+# $Id: printcontacts,v 1.6 2019/06/04 08:40:54 fulford Exp fulford $
 # $Source: /src/admin/usr/local/etc/RCS/printcontacts,v $
-# $Revision: 1.5 $
+# $Revision: 1.6 $
 # Author C W Fulford.
 # Copyright 2016 (c) C W Fulford.
 # Licensed for public use under the LGPL, .
 # For assistance contact fulford@fulford.net 0793 572 8612
 ########################################################################
 cmd=`basename $0`
-ver=`echo "$Id: printcontacts,v 1.5 2019/06/04 08:38:54 fulford Exp fulford $"|awk '{print $3,$4,$5}'`
+ver=`echo "$Id: printcontacts,v 1.6 2019/06/04 08:40:54 fulford Exp fulford $"|awk '{print $3,$4,$5}'`
 syntax="$cmd [-d]  [-v]|-V"
 while [ $# -gt 0 ] ;do
 	case $1 in 
 		-d) set -x;debug=0;shift;;
 		-v) verbose=:;shift;;
-		-V) echo "$cmd $Revision: 1.5 $ $Date: 2019/06/04 08:38:54 $"|awk '{print $1,$3,$6}';exit;;  
+		-V) echo "$cmd $Revision: 1.6 $ $Date: 2019/06/04 08:40:54 $"|awk '{print $1,$3,$6}';exit;;  
 	esac
 done
 
@@ -39,7 +39,8 @@ echo $title
  if [ ! $tile ];then
  	n=`ls|wc -w`
 	[ $n -gt 40 ]&&{
-		ls |awk 'NR <= 40 {print $1 }'
+		batchA=`ls |awk 'NR <= 40 {printf $1 }'`
+		echot $batchA
 	exit
 	}
 		
