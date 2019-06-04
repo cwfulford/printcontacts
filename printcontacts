@@ -1,0 +1,37 @@
+while [ $# -gt 0 ];do
+	case $1 in
+		-t) fmt=tif;shift ;;
+		-j) fmt=jpg;shift ;;
+		-l) tile=$2;shift 2;;
+	esac
+done
+fmt=${fmt:-jpg}
+dir=`basename \`pwd\``
+if [ $dir = "jpg" -o $dir = "tif" ];then 
+	cd ../
+fi 
+dir=`basename \`pwd\``
+title=`echo $dir| awk -F- '{print $1,$2}'`
+echo $title
+
+(cd $fmt
+ if [ ! $tile ];then
+ 	n=`ls|wc -w`
+	[ $n -gt 40 ]&&{
+		ls |awk '{ while (NR <= 40) print $1 }'
+	}
+		
+ 	case $n in
+		24) tile=6x4;;
+		25) tile=7x4;;
+		30) tile=8x4;;
+		36) tile=8x5;;
+	 esac
+	 [ "$tile" ] ||{
+		echo "$cmd: Don't know layout for $n frames">&2
+		exit
+	 }
+ fi
+ montage -title "$title"  -tile $tile -frame 5  -label %i  *.$fmt ../montage.jpg
+)
+
