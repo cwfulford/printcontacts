@@ -1,20 +1,20 @@
 #!/bin/bash
-# $Id: printcontacts,v 1.13 2019/06/04 09:16:51 fulford Exp $
+# $Id: printcontacts,v 1.14 2019/06/04 09:18:49 fulford Exp fulford $
 # $Source: /src/admin/usr/local/etc/RCS/printcontacts,v $
-# $Revision: 1.13 $
+# $Revision: 1.14 $
 # Author C W Fulford.
 # Copyright 2016 (c) C W Fulford.
 # Licensed for public use under the LGPL, .
 # For assistance contact fulford@fulford.net 0793 572 8612
 ########################################################################
 cmd=`basename $0`
-ver=`echo "$Id: printcontacts,v 1.13 2019/06/04 09:16:51 fulford Exp $"|awk '{print $3,$4,$5}'`
+ver=`echo "$Id: printcontacts,v 1.14 2019/06/04 09:18:49 fulford Exp fulford $"|awk '{print $3,$4,$5}'`
 syntax="$cmd [-d]  [-v]|-V"
 while [ $# -gt 0 ] ;do
 	case $1 in 
 		-d) set -x;debug=0;shift;;
 		-v) verbose=:;shift;;
-		-V) echo "$cmd $Revision: 1.13 $ $Date: 2019/06/04 09:16:51 $"|awk '{print $1,$3,$6}';exit;;  
+		-V) echo "$cmd $Revision: 1.14 $ $Date: 2019/06/04 09:18:49 $"|awk '{print $1,$3,$6}';exit;;  
 	esac
 done
 
@@ -60,4 +60,4 @@ while [ $c < $tot ];do
 	$batch ../montage$p.jpg
 	p=`expr $p +1`
 done
-cd ..
+cd .. 
