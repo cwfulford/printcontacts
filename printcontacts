@@ -1,20 +1,20 @@
 #!/bin/bash
-# $Id: printcontacts,v 1.16 2019/06/23 21:51:19 fulford Exp fulford $
+# $Id: printcontacts,v 1.17 2019/06/23 21:54:49 fulford Exp fulford $
 # $Source: /src/admin/usr/local/etc/RCS/printcontacts,v $
-# $Revision: 1.16 $
+# $Revision: 1.17 $
 # Author C W Fulford.
 # Copyright 2016 (c) C W Fulford.
 # Licensed for public use under the LGPL, .
 # For assistance contact fulford@fulford.net 0793 572 8612
 ########################################################################
 cmd=`basename $0`
-ver=`echo "$Id: printcontacts,v 1.16 2019/06/23 21:51:19 fulford Exp fulford $"|awk '{print $3,$4,$5}'`
+ver=`echo "$Id: printcontacts,v 1.17 2019/06/23 21:54:49 fulford Exp fulford $"|awk '{print $3,$4,$5}'`
 syntax="$cmd [-d]  [-v]|-V"
 while [ $# -gt 0 ] ;do
 	case $1 in 
 		-d) set -x;debug=0;shift;;
 		-v) verbose=:;shift;;
-		-V) echo "$cmd $Revision: 1.16 $ $Date: 2019/06/23 21:51:19 $"|awk '{print $1,$3,$6}';exit;;  
+		-V) echo "$cmd $Revision: 1.17 $ $Date: 2019/06/23 21:54:49 $"|awk '{print $1,$3,$6}';exit;;  
 	esac
 done
 
@@ -49,7 +49,7 @@ while [ $c -lt $tot ]; do
 	n=`echo $batch|wc -w` 
 	c=`expr $c + $n` 
  	[ $n -le 8 ] && tile=4x2
- 	[ $n -le 15 ] && tile=5x3
+ 	[ $n -le 15 -a $n -gt 8 ] && tile=5x3
  	[ $n -gt 15 -a $n -le 24 ] && tile=6x4
  	[ $n -gt 24 -a $n -le 28 ] && tile=7x4
  	[ $n -gt 28 -a $n -le 32 ] && tile=8x4 
