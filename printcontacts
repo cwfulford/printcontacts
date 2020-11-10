@@ -1,14 +1,14 @@
 #!/bin/bash
-# $Id: printcontacts,v 1.18 2020/11/10 21:04:16 fulford Exp fulford $
+# $Id: printcontacts,v 1.19 2020/11/10 21:06:05 fulford Exp fulford $
 # $Source: /src/admin/usr/local/etc/RCS/printcontacts,v $
-# $Revision: 1.18 $
+# $Revision: 1.19 $
 # Author C W Fulford.
 # Copyright 2016 (c) C W Fulford.
 # Licensed for public use under the LGPL, .
 # For assistance contact fulford@fulford.net 0793 572 8612
 ########################################################################
 cmd=`basename $0`
-ver=`echo "$Id: printcontacts,v 1.18 2020/11/10 21:04:16 fulford Exp fulford $"|awk '{print $3,$4,$5}'`
+ver=`echo "$Id: printcontacts,v 1.19 2020/11/10 21:06:05 fulford Exp fulford $"|awk '{print $3,$4,$5}'`
 syntax="$cmd [-t | -v] [-l <matrix> i] [ <title> ]"
 
 while [ $# -gt 0 ];do
@@ -26,7 +26,7 @@ if [ $dir = "jpg" -o $dir = "tif" -o $dir = "raw" ];then
 	cd ../
 fi 
 dir=`basename \`pwd\``
-[ "$title" ] && title=`echo $dir| awk -F- '{print $1,$2}'`
+[ -z "$title" ] && title=`echo $dir| awk -F- '{print $1,$2}'`
 echo "Title: $title"
 cd  $fmt 
 tot=`ls *.$ext|wc -w`;echo "Frames: $tot"
